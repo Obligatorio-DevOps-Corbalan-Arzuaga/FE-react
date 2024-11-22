@@ -34,7 +34,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
       with:
         args: >
-          -Dsonar.projectKey=front_app
+          -Dsonar.projectKey=FE-react
           -Dsonar.organization=Obligatorio-DevOps-Corbalan-Arzuaga
           -Dsonar.sources=.
           -Dsonar.exclusions=**/node_modules/**
