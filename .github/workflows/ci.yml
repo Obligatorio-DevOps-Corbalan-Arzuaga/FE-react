@@ -35,7 +35,7 @@ jobs:
       with:
         args: >
           -Dsonar.projectKey=FE-react
-          -Dsonar.organization=Obligatorio-DevOps-Corbalan-Arzuaga
+          -Dsonar.organization=obligatorio-devops-corbalan-arzuaga
           -Dsonar.sources=.
           -Dsonar.exclusions=**/node_modules/**
           -Dsonar.branch.name=${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
