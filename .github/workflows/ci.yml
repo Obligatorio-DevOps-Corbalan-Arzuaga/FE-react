@@ -28,7 +28,7 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-     - name: Analisis SonarCloud
+    - name: Analisis SonarCloud
       uses: SonarSource/sonarcloud-github-action@v2
       env:
         SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
