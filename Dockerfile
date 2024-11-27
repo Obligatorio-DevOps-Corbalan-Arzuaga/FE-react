@@ -20,6 +20,8 @@ FROM nginx:alpine AS prueba-local-nginx
 
 COPY --from=build-local /FE-react/dist/apps/catalog /usr/share/nginx/html
 
+USER nginx
+
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
