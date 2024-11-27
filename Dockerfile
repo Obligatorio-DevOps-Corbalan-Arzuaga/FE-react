@@ -6,12 +6,13 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY apps/catalog ./apps/catalog \
-    libs ./libs \
-    tsconfig.base.json ./ \
-    nx.json ./ \
-    workspace.json ./ \
-    babel.config.json ./
+COPY apps/catalog/src ./apps/catalog/src \
+     apps/catalog/project.json ./apps/catalog/project.json \
+     apps/catalog/tsconfig.app.json ./apps/catalog/tsconfig.app.json \
+     tsconfig.base.json ./ \
+     nx.json ./ \
+     workspace.json ./ \
+     babel.config.json ./
 
 RUN npm run build -- --project=catalog --configuration=production
 
