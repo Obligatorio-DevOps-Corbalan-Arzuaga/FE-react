@@ -42,6 +42,20 @@ jobs:
           -Dsonar.verbose=true
       continue-on-error: false
 
+    - name: Chequeo SonarCloud Quality Gate
+      run: |
+        STATUS=$(curl -s -u "${{ secrets.SONARCLOUD_TOKEN }}:" \
+        "https://sonarcloud.io/api/qualitygates/project_status?projectKey=Obligatorio-DevOps-Corbalan-Arzuaga_FE-react" \
+        | jq -r '.projectStatus.status')
+        if [ "$STATUS" != "OK" ]; then
+          echo "Quality Gate failed: $STATUS"
+          exit 1
+        else
+          echo "Quality Gate passed: $STATUS"
+        fi
+      env:
+        SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+
     - name: Build project
       run: npm run build -- --project=catalog --configuration=production
 
