@@ -6,13 +6,13 @@ COPY package*.json ./
 
 RUN npm install --ignore-scripts
 
-COPY apps/catalog/src ./apps/catalog/src \
-     apps/catalog/project.json ./apps/catalog/ \
-     apps/catalog/tsconfig.app.json ./apps/catalog/ 
-COPY nx.json ./ \
-     workspace.json ./ \
-     babel.config.json ./ \
-     tsconfig.base.json ./
+COPY nx.json / \
+     workspace.json / \
+     babel.config.json / \
+     tsconfig.base.json ./ 
+COPY apps/catalog/src/ apps/catalog/src/ \
+     apps/catalog/project.json apps/catalog/ \
+     apps/catalog/tsconfig.app.json apps/catalog/
 
 RUN npm run build -- --project=catalog --configuration=production
 
