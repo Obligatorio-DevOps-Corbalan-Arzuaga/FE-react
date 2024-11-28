@@ -41,6 +41,10 @@ jobs:
           -Dsonar.branch.name=${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
           -Dsonar.verbose=true
       continue-on-error: false
+
+    - name: Espera de 30 segundos
+      run: sleep 30
+    
     
     - name: Chequeo SonarCloud Quality Gate
       run: |
