@@ -9,10 +9,10 @@ RUN npm install --ignore-scripts
 COPY apps/catalog/src ./apps/catalog/src \
      apps/catalog/project.json ./apps/catalog/ \
      apps/catalog/tsconfig.app.json ./apps/catalog/ \
-     nx.json ./ \
-     workspace.json ./ \
-     babel.config.json ./ \
-     tsconfig.base.json ./
+     nx.json ./config/ \
+     workspace.json ./config/ \
+     babel.config.json ./config/ \
+     tsconfig.base.json ./config/
 
 RUN npm run build -- --project=catalog --configuration=production
 
