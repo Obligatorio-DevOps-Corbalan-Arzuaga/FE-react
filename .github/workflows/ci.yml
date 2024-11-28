@@ -42,33 +42,16 @@ jobs:
           -Dsonar.verbose=true
       continue-on-error: false
 
-    - name: Verificar análisis en SonarCloud
-      run: |
-        curl -s -u "${{ secrets.SONARCLOUD_TOKEN }}:" \
-        "https://sonarcloud.io/api/components/show?component=Obligatorio-DevOps-Corbalan-Arzuaga_FE-react" | jq .
-
-    - name: Espera de 60 segundos
-      run: sleep 60
-    
-    
-    - name: Chequeo SonarCloud Quality Gate
-      run: |
-        RESPONSE=$(curl -s -u "${{ secrets.SONARCLOUD_TOKEN }}:" \
-        "https://sonarcloud.io/api/qualitygates/project_status?projectKey=Obligatorio-DevOps-Corbalan-Arzuaga_FE-react")
-    
-        echo "Respuesta de la API: $RESPONSE"
-    
-        STATUS=$(echo "$RESPONSE" | jq -r '.projectStatus.status')
-    
-        if [ "$STATUS" != "OK" ]; then
-          echo "Quality Gate failed: $STATUS"
-          exit 1
-        else
-          echo "Quality Gate passed: $STATUS"
-        fi
+    - name: Verificar resultados del análisis en SonarCloud
+      uses: sonarsource/sonarqube-quality-gate-action@master
       env:
         SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+        SONAR_HOST_URL: "https://sonarcloud.io"
 
+    - name: Mostrar el estado del Quality Gate
+      run: |
+       echo "El estado del Quality Gate es: ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
+   
     - name: Build project
       run: npm run build -- --project=catalog --configuration=production
 
