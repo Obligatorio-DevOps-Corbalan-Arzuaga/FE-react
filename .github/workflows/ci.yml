@@ -47,8 +47,8 @@ jobs:
         curl -s -u "${{ secrets.SONARCLOUD_TOKEN }}:" \
         "https://sonarcloud.io/api/components/show?component=Obligatorio-DevOps-Corbalan-Arzuaga_FE-react" | jq .
 
-    - name: Espera de 30 segundos
-      run: sleep 30
+    - name: Espera de 60 segundos
+      run: sleep 60
     
     
     - name: Chequeo SonarCloud Quality Gate
