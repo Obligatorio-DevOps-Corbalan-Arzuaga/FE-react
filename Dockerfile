@@ -4,7 +4,7 @@ WORKDIR /FE-react
 
 COPY package*.json ./
 
-RUN npm install --ignore-scripts
+RUN npm install --ignore-scripts && mkdir -p /FE-react/config
 
 COPY apps/catalog/src ./apps/catalog/src \
      apps/catalog/project.json ./apps/catalog/ \
