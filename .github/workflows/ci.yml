@@ -6,11 +6,6 @@ on:
       - develop
       - staging
       - main
-  pull_request:
-    branches:
-      - develop
-      - staging
-      - main
 
 jobs:
   build:
@@ -65,4 +60,14 @@ jobs:
       
     - name: Upload to S3
       run: |
-        aws s3 sync ./dist/apps/catalog s3://app-react-obli/frontend/${{ github.ref_name }} --delete
+        if [ "${{ github.ref_name }}" = "develop" ]; then
+          BUCKET_NAME="app-react-obli-develop"
+        elif [ "${{ github.ref_name }}" = "staging" ]; then
+          BUCKET_NAME="app-react-obli-staging"
+        elif [ "${{ github.ref_name }}" = "main" ]; then
+          BUCKET_NAME="app-react-obli-main"
+        else
+          echo "Rama no soportada: ${{ github.ref_name }}"
+          exit 1
+        fi
+        aws s3 sync ./dist/apps/catalog s3://$BUCKET_NAME/ --delete
