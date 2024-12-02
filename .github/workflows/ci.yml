@@ -57,6 +57,9 @@ jobs:
     
     - name: List contents of dist folder
       run: ls -alh ./dist
+    
+    - name: List contents recursively
+      run: ls -R ./dist
 
   upload:
     runs-on: ubuntu-latest
