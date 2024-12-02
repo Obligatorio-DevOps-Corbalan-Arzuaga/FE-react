@@ -54,6 +54,9 @@ jobs:
    
     - name: Build project
       run: npm run build -- --project=catalog --configuration=production
+    
+    - name: List contents of dist folder
+      run: ls -alh ./dist
 
   upload:
     runs-on: ubuntu-latest
@@ -67,9 +70,6 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ secrets.AWS_REGION }}
       
-      - name: List contents of dist folder
-        run: ls -alh ./dist
-
       - name: Upload to S3
         run: |
           aws s3 sync ./dist s3://app-react-obli/frontend/${{ github.ref_name }} --delete
