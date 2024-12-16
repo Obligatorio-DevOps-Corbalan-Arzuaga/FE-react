@@ -61,11 +61,11 @@ jobs:
     - name: Upload to S3
       run: |
         if [ "${{ github.ref_name }}" = "develop" ]; then
-          BUCKET_NAME="app-react-obli-develop"
+          BUCKET_NAME= ${{ secrets.DEV_BUCKET_NAME }}
         elif [ "${{ github.ref_name }}" = "staging" ]; then
-          BUCKET_NAME="app-react-obli-staging"
+          BUCKET_NAME= ${{ secrets.STG_BUCKET_NAME }}
         elif [ "${{ github.ref_name }}" = "main" ]; then
-          BUCKET_NAME="app-react-obli-main"
+          BUCKET_NAME= ${{ secrets.PROD_BUCKET_NAME }}  
         else
           echo "Rama no soportada: ${{ github.ref_name }}"
           exit 1
